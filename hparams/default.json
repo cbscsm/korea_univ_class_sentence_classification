@@ -1,0 +1,14 @@
+{
+  "model" : "char_lstm_classifier",
+  "root_dir": "./runs/char_lstm_classifier",
+  "vocab_size": 10000,
+  "num_epochs": 9,
+  "batch_size": 16,
+  "filter_size" : [2,3,4,5],
+  "num_filters" : 30,
+  "glove_dir" : "./glove.6B",
+  "embedding_dim": 300,
+  "char_embedding_dim": 50,
+  "rnn_hidden_dim" : 256,
+  "dropout_keep_prob": 1.0
+}
