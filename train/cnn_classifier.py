@@ -67,16 +67,13 @@ class TextClassifier:
                 )
                 # shape = [batch, time, 1, out_channels]
                 feature = tf.reduce_max(feature, axis=1)
-                print(feature.shape)
                 feature = tf.squeeze(feature)
                 feature = tf.reshape(feature, [tf.shape(inputs)[0], self.hparams.num_filters])
                 # shape = [batch, out_channels]
-                print(feature.shape)
                 features.append(feature)
 
         # shape = [batch, out_channels * num_filters]
         layer_out = tf.concat(features, axis=1)
-        print(layer_out.shape)
 
         with tf.variable_scope("layer_out"):
             logits = tf.layers.dense(
@@ -173,5 +170,7 @@ class TextClassifier:
                             global_step_val, loss_val, accuracy_val * 100))
 
                 self._logger.info("End of epoch %d." % (epochs_completed + 1))
-                save_path = saver.save(sess, "%s/model.ckpt" % self.hparams.model, global_step=global_step_val)
+                save_path = saver.save(sess, os.path.join(self.hparams.root_dir,
+                                                          "saves_%s/model.ckpt" % (self.hparams.model)),
+                                       global_step=global_step_val)
                 self._logger.info("Model saved at: %s" % save_path)
