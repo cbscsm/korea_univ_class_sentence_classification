@@ -1,4 +1,5 @@
 import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import logging
 import tensorflow as tf
 from tensorflow.contrib import rnn

@@ -1,5 +1,4 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import argparse
 import json
 import collections
@@ -83,7 +82,6 @@ def load_and_evaluate(args, builder_class):
     # Build graph
     model = builder_class(hparams, args.data)
     model.evaluate(args.predict)
-    # model.evaluate(args.predict)
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser(description="Named Entity Tagger.")
@@ -97,6 +95,6 @@ if __name__ == "__main__":
 
 
     if args.evaluate is not None:
-        load_and_evaluate(args, char_lstm_classifier.TextClassifier)
+        load_and_evaluate(args, cnn_classifier.TextClassifier)
     else:
-        train_model(args, char_lstm_classifier.TextClassifier)
+        train_model(args, cnn_classifier.TextClassifier)

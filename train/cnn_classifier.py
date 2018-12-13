@@ -1,4 +1,5 @@
 import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import logging
 import tensorflow as tf
 from tensorflow.contrib import rnn
@@ -72,7 +73,7 @@ class TextClassifier:
                 # shape = [batch, out_channels]
                 features.append(feature)
 
-        # shape = [batch, out_channels * num_filters]
+        # shape = [batch, out_channels * len(self.hparams.filter_size)] // e.g.) [?,120(30*4)]
         layer_out = tf.concat(features, axis=1)
 
         with tf.variable_scope("layer_out"):
@@ -174,3 +175,9 @@ class TextClassifier:
                                                           "saves_%s/model.ckpt" % (self.hparams.model)),
                                        global_step=global_step_val)
                 self._logger.info("Model saved at: %s" % save_path)
+
+    def run_evaluate(self):
+        assert("run_evaluate method")
+
+    def evaluate(self):
+        assert("evaluate method")
